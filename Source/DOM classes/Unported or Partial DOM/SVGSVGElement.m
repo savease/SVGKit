@@ -180,6 +180,20 @@
 		self.width = nil;
 	if( self.height.unitType == SVG_LENGTHTYPE_PERCENTAGE )
 		self.height = nil;
+    
+    
+    NSString* stringX = [self getAttribute:@"x"];
+	NSString* stringY = [self getAttribute:@"y"];
+	
+	if( stringX == nil || stringX.length < 1 )
+		self.x = nil; // i.e. undefined
+	else
+		self.x = [SVGLength svgLengthFromNSString:stringX];
+	
+	if( stringY == nil || stringY.length < 1 )
+		self.y = nil; // i.e. undefined
+	else
+		self.y = [SVGLength svgLengthFromNSString:stringY];
 	
 	/* set the frameRequestedViewport appropriately (NB: spec doesn't allow for this but it REQUIRES it to be done and saved!) */
 	if( self.width != nil && self.height != nil )
