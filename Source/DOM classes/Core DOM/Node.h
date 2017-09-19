@@ -2,9 +2,9 @@
 //  Node.h
 *
  http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-1950641247
- 
+
  interface Node {
- 
+
  // NodeType
  const unsigned short      ELEMENT_NODE                   = 1;
  const unsigned short      ATTRIBUTE_NODE                 = 2;
@@ -18,12 +18,12 @@
  const unsigned short      DOCUMENT_TYPE_NODE             = 10;
  const unsigned short      DOCUMENT_FRAGMENT_NODE         = 11;
  const unsigned short      NOTATION_NODE                  = 12;
- 
+
  readonly attribute DOMString        nodeName;
  attribute DOMString        nodeValue;
  // raises(DOMException) on setting
  // raises(DOMException) on retrieval
- 
+
  readonly attribute unsigned short   nodeType;
  readonly attribute Node             parentNode;
  readonly attribute NodeList         childNodes;
@@ -34,10 +34,10 @@
  readonly attribute NamedNodeMap     attributes;
  // Modified in DOM Level 2:
  readonly attribute Document         ownerDocument;
- Node               insertBefore(in Node newChild, 
+ Node               insertBefore(in Node newChild,
  in Node refChild)
  raises(DOMException);
- Node               replaceChild(in Node newChild, 
+ Node               replaceChild(in Node newChild,
  in Node oldChild)
  raises(DOMException);
  Node               removeChild(in Node oldChild)
@@ -49,14 +49,14 @@
  // Modified in DOM Level 2:
  void               normalize();
  // Introduced in DOM Level 2:
- boolean            isSupported(in DOMString feature, 
+ boolean            isSupported(in DOMString feature,
  in DOMString version);
  // Introduced in DOM Level 2:
  readonly attribute DOMString        namespaceURI;
  // Introduced in DOM Level 2:
  attribute DOMString        prefix;
  // raises(DOMException) on setting
- 
+
  // Introduced in DOM Level 2:
  readonly attribute DOMString        localName;
  // Introduced in DOM Level 2:
@@ -64,14 +64,14 @@
  };
 
  -------------------------------
- 
+
  // DOM Level 3 that we *need*, partly because SVG Spec makes one brief reference to it: http://www.w3.org/TR/SVG/text.html#InterfaceSVGTextContentElement
- 
+
  http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/core.html#Node3-textContent
- 
+
  // Introduced in DOM Level 3:
  attribute DOMString       textContent;
- 
+
 */
 
 #import <Foundation/Foundation.h>
@@ -103,7 +103,7 @@ typedef enum DOMNodeType
 
 @property(nonatomic,strong,readonly) NSString* nodeName;
 @property(nonatomic,strong,readonly) NSString* nodeValue;
-	
+
 @property(nonatomic,readonly) DOMNodeType nodeType;
 @property(nonatomic,weak,readonly) Node* parentNode;
 @property(nonatomic,strong,readonly) NodeList* childNodes;
@@ -111,7 +111,7 @@ typedef enum DOMNodeType
 @property(nonatomic,weak,readonly) Node* lastChild;
 @property(nonatomic,weak,readonly) Node* previousSibling;
 @property(nonatomic,weak,readonly) Node* nextSibling;
-@property(nonatomic,strong,readonly) NamedNodeMap* attributes; /*< NB: according to DOM Spec, this is null if the Node is NOT subclassed as an Element */
+@property(nonatomic,strong,readonly) NamedNodeMap* attributes; // NB: according to DOM Spec, this is null if the Node is NOT subclassed as an Element
 
 // Modified in DOM Level 2:
 @property(nonatomic,weak,readonly) Document* ownerDocument;
@@ -160,13 +160,13 @@ typedef enum DOMNodeType
 
 /** EXPERIMENTAL: not fully implemented or tested - this correctly outputs most SVG files, but is missing esoteric
  features such as EntityReferences, currently they are simply ignored
- 
+
  This method should be used hand-in-hand with the proprietary SVGDocument method "allNamespaces" and the SVGSVGElement method "
- 
+
  @param outputString an empty MUTABLE string we can accumulate with output (NB: this method uses a lot of memory, needs to accumulate data)
- 
+
  @param prefixesByKNOWNNamespace (required): a dictionary mapping "XML namespace URI" to "prefix to use inside the xml-tags", e.g. "http://w3.org/2000/svg" usually is mapped to "svg" (or to "", signifying it's the default namespace). This MUST include ALL NAMESPACES FOUND IN THE DOCUMENT (it's recommended you use SVGDocument's "allPrefixesByNamespace" method, and some post-processing, to get an accurate input here)
- 
+
  @param prefixesByACTIVENamespace (required): a mutable dictionary listing which elements of the other dictionary are active in-scope - i.e. which namespaces have been output by this node or a higher node in the tree. You pass-in an empty dictionary to the root SVG node and it fills it in as required.
  */
 -(void) appendXMLToString:(NSMutableString*) outputString availableNamespaces:(NSDictionary*) prefixesByKNOWNNamespace activeNamespaces:(NSMutableDictionary*) prefixesByACTIVENamespace;

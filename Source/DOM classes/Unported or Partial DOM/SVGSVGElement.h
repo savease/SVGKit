@@ -1,10 +1,10 @@
 /**
  SVGSVGElement.m
- 
+
  Represents the "<svg>" tag in an SVG file
- 
+
  http://www.w3.org/TR/SVG/struct.html#InterfaceSVGSVGElement
- 
+
  readonly attribute SVGAnimatedLength x;
  readonly attribute SVGAnimatedLength y;
  readonly attribute SVGAnimatedLength width;
@@ -20,7 +20,7 @@
  readonly attribute SVGViewSpec currentView;
  attribute float currentScale;
  readonly attribute SVGPoint currentTranslate;
- 
+
  unsigned long suspendRedraw(in unsigned long maxWaitMilliseconds);
  void unsuspendRedraw(in unsigned long suspendHandleID);
  void unsuspendRedrawAll();
@@ -118,7 +118,7 @@
 
 #pragma mark - below here VIOLATES THE STANDARD, but needs to be CAREFULLY merged with spec
 
-- (SVGElement *)findFirstElementOfClass:(Class)classParameter; /*< temporary convenience method until SVGDocument support is complete */
+- (SVGElement *)findFirstElementOfClass:(Class)classParameter; // temporary convenience method until SVGDocument support is complete
 
 #pragma mark - elements REQUIRED to implement the spec but not included in SVG Spec due to bugs in the spec writing!
 
